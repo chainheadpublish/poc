@@ -71,7 +71,7 @@ The following steps will be explained:
 
 - Set-up and start Ethereum network
 - Smart code contract walk-through in VS Code.
-- Install Metamask extension in Chrome.
+- Install Metamask extension.
 - Deploy contract with Remix IDE.
 - Invoke functions of contract with Remix IDE.
 - Show in console various block numbers, transaction hashes appearing in Remix IDE.
@@ -220,3 +220,34 @@ geth --datadir node1/ --syncmode 'full' --port 30311 --rpc --rpcaddr 'localhost'
 ```bash
 geth --datadir node2/ --syncmode 'full' --port 30312 --rpc --rpcaddr 'localhost' --rpcport 8502 --rpcapi 'personal,db,eth,net,web3,txpool,miner' --bootnodes 'enode://c4a1a1f85f4c0c87e8c17a5e73421a2fe675d9d9d810ef3787b6c5cb4068159873f024c0c88df815c12bd55e28ef5c473f18af7696dd51d9b2af7f172c08063f@127.0.0.1:30310' --networkid 2525 --gasprice '1' -unlock 'address generated for node1' --password node2/password.txt --mine
 ```
+
+## Smart Contract walk-through in VS Code
+
+This section will describe the Smart Contract `loansynd.sol` developed for this PoC.
+
+## Install Metamask extension
+
+- Install Metamask extension for Chrome from [here](https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn)
+- Install Metamask extension for Firefox from [here](https://addons.mozilla.org/en-US/firefox/addon/ether-metamask/)
+
+Configure Metamask to use the RPC end-point of one of the nodes launched in previous step e.g. `http://localhost:8501`.
+
+## Deploy contract with Remix IDE
+
+- Launch Remix IDE with http://remix.ethereum.org/
+- Delete the default contract code file (`ballot.sol` and `ballot_test.sol`) that appears.
+- Click on plus icon to add a new contract file `loansynd.sol`.
+- Copy-paste the code in the contract file into the IDE.
+- On the _Run_ tab, ensure that _Environment_ is set to _Injected Web3_.
+- On the _Compile_ tab, click on _Start to compile_ button. There maybe a few warnings; ignore them for now.
+- On the _Run_ tab,
+  - Note the account number currently visible in the drop-down.
+  - Click on _Deploy_ button to deploy the contract to our network.
+
+## Invoke functions of contract with Remix IDE
+
+- Create a new consortium without leader
+- Apply new loan with the above consortium and a collateral
+- Apply new loan with the above consortium and same collateral
+- Create a new consortium with leader
+- Apply new loan with the above consortium and same collateral
