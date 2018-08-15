@@ -4,13 +4,45 @@ A simple PoC for loan syndication. The scope of this PoC is defined as:
 
 > Loan syndication between a consortium of banks to put the underlying collateral on block-chain to share that information between the consortium to avoid frauds. Leverage the smart contracts to build this prototype.
 
+- [Introduction](#introduction)
+  - [Background](#background)
+  - [Getting started](#getting-started)
+  - [Smart Contract demo](#smart-contract-demo)
+    - [Deploy contract](#deploy-contract)
+    - [Gas calculation](#gas-calculation)
+    - [Test contract](#test-contract)
+  - [Smart Contract and AWS infra-structure demo](#smart-contract-and-aws-infra-structure-demo)
+  - [Decentralized consensus](#decentralized-consensus)
+  - [Solution](#solution)
+    - [Infra-structure](#infra-structure)
+    - [Consensus algorithm](#consensus-algorithm)
+    - [Metamask](#metamask)
+  - [Microsoft VS Code](#microsoft-vs-code)
+    - [Remix IDE](#remix-ide)
+    - [Terminal](#terminal)
+  - [Demo walk-through - local](#demo-walk-through---local)
+  - [Set-up and start Ethereum network](#set-up-and-start-ethereum-network)
+    - [Install `ethereum`](#install-ethereum)
+    - [Initial set-up](#initial-set-up)
+    - [Create accounts for sealing transactions](#create-accounts-for-sealing-transactions)
+    - [Create genesis file](#create-genesis-file)
+    - [Initialize Ethereum with the genesis file](#initialize-ethereum-with-the-genesis-file)
+    - [Create a boot node and start](#create-a-boot-node-and-start)
+    - [Launch nodes](#launch-nodes)
+      - [Node1](#node1)
+      - [Node2](#node2)
+  - [Smart Contract walk-through in VS Code](#smart-contract-walk-through-in-vs-code)
+  - [Install Metamask extension](#install-metamask-extension)
+  - [Deploy contract with Remix IDE](#deploy-contract-with-remix-ide)
+  - [Invoke functions of contract with Remix IDE](#invoke-functions-of-contract-with-remix-ide)
+
 ## Background
 
 Loan syndication is defined at [Investopedia](https://www.investopedia.com/terms/l/loansyndication.asp) as follows:
 
 >Loan syndication is the process of involving a group of lenders to fund various portions of a loan for a single borrower. Loan syndication most often occurs when a borrower requires an amount too large for a single lender to provide or when the loan is outside the scope of a lender's risk exposure levels. Thus, multiple lenders form a syndicate to provide the borrower with the requested capital.
 
-In this PoC, we show how, a given collateral is not pledged multiple times within a consortium of lenders or even across consortia.
+In this PoC, we show how, a given collateral is not pledged multiple times within a consortium of lenders or even across consortia. To jump into the demo, go to **Getting Started**.
 
 ## Decentralized consensus
 
@@ -37,217 +69,78 @@ Therefore, we re-write the scope of PoC in terms of decentralized consensus as f
 
 ## Solution
 
-This PoC is developed with Ethereum technologies and the various components are called out as follows.
-
-### Infra-structure
-
-For a quick demonstration of the Smart Contract in action, the infra-structure is limited to nodes running on a local laptop. Then, the same infra-structure is migrated to the cloud for a more robust environment.
-
-### Consensus algorithm
-
-The chosen algorithm is Proof of Authority (PoA). With this algorithm ....
-
-### Metamask
-
-A Chrome or a Firefox extension to integrated with decentralized applications from the browser directly. [Metamask](https://metamask.io/)
-
-## Microsoft VS Code
-
-An editor to develop Smart Contracts in Solidity programming language.
-
-### Remix IDE
-
-A browser based Integrated Development Environment (IDE) to deploy contracts in a simulated environment. [Remix](http://remix.ethereum.org)
-
-### Terminal
-
-A terminal prompt to run the Javascript console to browse the blockchain. [Javascript-API](https://github.com/ethereum/wiki/wiki/JavaScript-API)
-
-## Demo walk-through - local
-
-In this demo, we create two folders and run Ethereum client from these folders to indicate two organisations that are required to approve a transaction before they are committed to a block.
-
-The following steps will be explained:
-
-- Set-up and start Ethereum network
-- Smart code contract walk-through in VS Code.
-- Install Metamask extension.
-- Deploy contract with Remix IDE.
-- Invoke functions of contract with Remix IDE.
-- Show in console various block numbers, transaction hashes appearing in Remix IDE.
-
-## Set-up and start Ethereum network
-
-### Install `ethereum`
-
-- Install `ethereum` on a Mac laptop as follows. Instructions for other operating systems can be found [here](https://github.com/ethereum/go-ethereum/wiki/Building-Ethereum).
-
-```bash
-brew tap ethereum/ethereum
-brew install ethereum
-```
-
-### Initial set-up
-
-We create two folders that serve as two nodes in an Ethereum network.
-
-```bash
-mkdir poc
-cd poc
-mkdir node1
-mkdir node2
-```
-
-### Create accounts for sealing transactions
-
-Run the following commands to set-up accounts that will be needed to seal the transactions. These commands will prompt for passwords; enter them and make a note of it. These commands will also show the created address; note them and save them for later use.
-
-```bash
-geth --datadir node1/ account new
-geth --datadir node2/ account new
-```
-
-The created account can be seen in the `node1/keystore` and `node2/keystore` folders where the address appears as the suffix in the file name.
-
-We will save the passwords (e.g. `Welc0me`) in a text file to save copy-paste effort later.
-
-```bash
-echo 'Welc0me' > node1/passsword.txt
-echo 'Welc0me' > node2/passsword.txt
-```
-
-### Create genesis file
-
-To create genesis file, we launch the `puppeth` program to help us simplify the process. Follow the prompts below to generate the genesis file `genesis.json`.
-
-```bash
-Please specify a network name to administer (no spaces, please)
-> poc
-What would you like to do? (default = stats)
- 1. Show network stats
- 2. Configure new genesis
- 3. Track new remote server
- 4. Deploy network components
-> 2
-
-Which consensus engine to use? (default = clique)
- 1. Ethash - proof-of-work
- 2. Clique - proof-of-authority
-> 2
-
-How many seconds should blocks take? (default = 15)
-> 10
-
-Which accounts are allowed to seal? (mandatory at least one)
-> 0x  _enter address generated for node1_
-> 0x  _enter address generated for node2_
-> 0x
-
-Specify your chain/network ID if you want an explicit one (default = random)
-> 2525
-
-What would you like to do? (default = stats)
- 1. Show network stats
- 2. Manage existing genesis
- 3. Track new remote server
- 4. Deploy network components
-> 2
-
-1. Modify existing fork rules
- 2. Export genesis configuration
-> 2
-
-Which file to save the genesis into? (default = devnet.json)
-> genesis.json
-INFO [01-23|15:16:17] Exported existing genesis block
-
-What would you like to do? (default = stats)
- 1. Show network stats
- 2. Manage existing genesis
- 3. Track new remote server
- 4. Deploy network components
-> ^C // ctrl+C to quit puppeth
-```
-
-### Initialize Ethereum with the genesis file
-
-```bash
-geth --datadir node1/ init genesis.json
-geth --datadir node2/ init genesis.json
-```
-
-### Create a boot node and start
-
-A boot node helps nodes discover other nodes in the network. To start this boot node, first we generate a key with the command as shown below.
-
-```bash
-bootnode -genkey boot.key
-```
-
-Then, we launch the boot node as follows:
-
-```bash
-bootnode -nodekey boot.key -verbosity 9 -addr :30310
-```
-
-The verbosity level of `9` helps us see the nodes discover each other. The look-up port for boot node is set to `30310` and will be set-up when launching individual nodes. As a result of running this command, the following output is seen:
-
-```bash
-INFO [02-07|22:44:09] UDP listener up                          self=enode://c4a1a1f85f4c0c87e8c17a5e73421a2fe675d9d9d810ef3787b6c5cb4068159873f024c0c88df815c12bd55e28ef5c473f18af7696dd51d9b2af7f172c08063@[::]:30310
-```
-
-### Launch nodes
-
-To launch the nodes, we consider the following:
-
-- Reference to boot node as launched in previous step.
-- Port number for communication with other nodes.
-- RPC port for interaction with Metamask.
-- Type of API to be exposed on the RPC port.
-- Network identifier that was set with `puppeth`.
-- Unlock account, with the password in a specified file and start mining.
-
-Note that, the port numbers are set differently for both nodes as they are running locally on a laptop.
-
-#### Node1
-
-```bash
-geth --datadir node1/ --syncmode 'full' --port 30311 --rpc --rpcaddr 'localhost' --rpcport 8501 --rpcapi 'personal,db,eth,net,web3,txpool,miner' --bootnodes 'enode://c4a1a1f85f4c0c87e8c17a5e73421a2fe675d9d9d810ef3787b6c5cb4068159873f024c0c88df815c12bd55e28ef5c473f18af7696dd51d9b2af7f172c08063f@127.0.0.1:30310' --networkid 2525 --gasprice '1' -unlock 'address generated for node1' --password node1/password.txt --mine
-```
-
-#### Node2
-
-```bash
-geth --datadir node2/ --syncmode 'full' --port 30312 --rpc --rpcaddr 'localhost' --rpcport 8502 --rpcapi 'personal,db,eth,net,web3,txpool,miner' --bootnodes 'enode://c4a1a1f85f4c0c87e8c17a5e73421a2fe675d9d9d810ef3787b6c5cb4068159873f024c0c88df815c12bd55e28ef5c473f18af7696dd51d9b2af7f172c08063f@127.0.0.1:30310' --networkid 2525 --gasprice '1' -unlock 'address generated for node1' --password node2/password.txt --mine
-```
-
-## Smart Contract walk-through in VS Code
-
-This section will describe the Smart Contract `loansynd.sol` developed for this PoC.
-
-## Install Metamask extension
-
-- Install Metamask extension for Chrome from [here](https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn)
-- Install Metamask extension for Firefox from [here](https://addons.mozilla.org/en-US/firefox/addon/ether-metamask/)
-
-Configure Metamask to use the RPC end-point of one of the nodes launched in previous step e.g. `http://localhost:8501`.
-
-## Deploy contract with Remix IDE
-
-- Launch Remix IDE with http://remix.ethereum.org/
-- Delete the default contract code file (`ballot.sol` and `ballot_test.sol`) that appears.
-- Click on plus icon to add a new contract file `loansynd.sol`.
-- Copy-paste the code in the contract file into the IDE.
-- On the _Run_ tab, ensure that _Environment_ is set to _Injected Web3_.
-- On the _Compile_ tab, click on _Start to compile_ button. There maybe a few warnings; ignore them for now.
-- On the _Run_ tab,
-  - Note the account number currently visible in the drop-down.
-  - Click on _Deploy_ button to deploy the contract to our network.
-
-## Invoke functions of contract with Remix IDE
-
-- Create a new consortium without leader
-- Apply new loan with the above consortium and a collateral
-- Apply new loan with the above consortium and same collateral
-- Create a new consortium with leader
-- Apply new loan with the above consortium and same collateral
+As follows.
+
+## Getting started
+
+There are two ways to see this PoC in action. First, is a simple demonstration of the Smart Contract without focussing much on underlying infra-structure. Second, an underlying infra-structure on Amazon Web Services (AWS), on to which the Smart Contract is deployed, is described.
+
+> **NOTE**, it is a good practice to save only identifiers or references to actual data on the blockchain. On one hand, this makes the blockchain _light weight_ and on the other, a certain level of privacy is maintained. Therefore, this demo saves the identifiers _only_ on the blockchain. The mechanism to generate and derefernce the identifiers is considered **out of scope**.
+
+## Smart Contract demo
+
+### Deploy contract
+
+For the Smart Contract demo, follow the steps below.
+
+1. Launch https://remix.ethereum.org in a browser.
+2. Remove the default `.sol` contract that appears.  
+  2.1 On the left hand navigation pane, expand the button for browser.  
+  2.2 Delete files appearing there. See ![Delete existing files](png/remix-ide.png)
+3. Click the plus icon on the top of left hand navigation pane.
+4. Enter file name as `loansynd.sol` and click OK. ![New contract](png/new-contract.png)
+5. Copy all the contents of `loandsynd.sol` from this project into the editor. ![Contract code in Remix IDE](png/new-contract-code.png)
+6. Click on **Start to Compile**. (See ![Start to Compile](png/start-compile.png)). You may see some compilation warnings; they are OK to ignore for this demo.
+7. Click on **Run** tab. Ensure that the **Environment** is set to **Javascript VM**. This option helps in quickly testing the contract without focussing on the underlying infra-structure. ![Environment setting](png/run-environment.png)
+8. Click on **Deploy** button to deploy this contract. ![Deploy contract](png/deploy.png)
+9. The results of deployment can be seen in screen-shot below. ![Deployment results](png/deployment-results.png)   
+  9.1 Since the deployment of the contract is itself a transaction that changes the _world state_ of Ethereum, it has a corresponding a transaction hash as shown in the red box.  
+  9.2 Since this transaction is a deployment of a contract, the Remix IDE shows the address where this contract was deployed. This is highlighted in the blue box. Note the trailing two hex digits; they are the same as shown in the blue box on the right hand side navigation pane.  
+  9.3 The functions of this contract are shown immediately below it as marked in the orange box.  
+  9.4 The same contract and its functions can be displayed by copy-pasting the contract address (see 9.2) into the text field left of **At Address** button and clicking the same.  
+  9.5 The address used to deploy this contract is marked in the green boxes. This address is automatically generated and credited with 100 ETH by the Javascript VM for sake of convenience.
+
+### Gas calculation
+
+In the results of deployment, the following can be seen:
+
+1. Gas sent is `3000000`.
+2. The transaction cost - as reported in Remix IDE - is `1205713`.
+3. The execution cost is `888769`.
+4. The transaction cost - as reported in Remix IDE - is inclusive of the execution cost. Therefore, the _actual_ transaction cost is the difference of 2 and 3 above; or, `316944`.
+
+This section explores the figures as reported above.
+
+1. The gas sent is simply the figure that appears immediately below the **Account** field in the right hand side navigation pane.
+2. The Appendix for fee schedule in the [Ethereum Yellow Paper](https://ethereum.github.io/yellowpaper/paper.pdf) mentions `200` gas for every byte for `Gcodedeposit` operation. This operation is used for contract creation.
+3. On the **Compile** tab, click on **Details** button to see the result of compilation. Scroll down all the way to **Runtime bytecode**. Refer ![Runtime bytecode](png/runtime-bytecode.png).
+4. Click on the icon to copy the displayed JSON and paste into a plain text file. From that file, copy the value of the `object` field and paste into yet another plain text file and save it. Check the number of bytes reported and divide by two for the number of bytes in contract creation. It should be `4338`.
+5. Multiply the byte count with gas price for contract creation: `4338 * 200 = 867600` to return code deposit cost.
+6. In the compilation output details page, there is a section for **Assembly** that shows the operation codes correspoding to this Solidity code. This [handy spreadsheet](https://docs.google.com/spreadsheets/d/1n6mRqkBz3iWcOlRem_mO09GtSKEKrAsfO7Frgx18pNU/edit#gid=0) can be used for calculating the execution cost.
+7. A simpler way is to look at the **GASESTIMATES** section in the compiler output (see 3 to locate this output) as shown in the ![gas estimates screenshot](png/gas-estimates.png). In that section, we see the value of `executionCost` as `21169`. Adding to this the code deposit cost (see 5) of `867600`, the total execution cost of `888769` is arrived at.
+8. Further, the following prices also apply:  
+  8.1. A fee of `32000` for `Gtxcreate` which is a contract creating transaction.  
+  8.2. A fee of `4` for `Gtxdatazero` for every zero byte of data or code for a transaction.  
+  8.3. A fee of `68` for `Gtxdatanonzero` for every non-zero byte of data or code for a transaction.  
+  8.4. A fee of `21000` for `Gtransaction` for every transaction.
+9. It is tedious to count the number of zero and non-zero bytes in the runtime byte code of `4338` bytes (see 4). Nevertheless, some back calculation can probably help verify.  
+  9.1. If `x` is number of zero bytes and `y` the number of non-zero bytes, then `x + y = 4338` and `4x + 68y = 316944 - 32000 - 21000`.  
+  9.2 Solving these equations, `x=485` and `y=3853` - reasonable.
+10. Finally, post contract deployment, the balance of the address is the difference between `100` ETH (initial) and total transaction cost `1205713 wei`.
+
+### Test contract
+
+A new consortium of banks is recorded on the blockchain. In loan syndication, there is a lead banker within a consortium. This Smart Contract provides two options for defining the leader of a consortium. First, the leader is automatically set to the contract deployer _if_ the address creating the consortium is same as that of deployer. Second, the leader maybe manually provided. For sake of simplicity, this document uses the first option.
+
+> The input type is set to `bytes32` so that all entries are prefixed with a `0x` and padded with zeroes for 32 bytes.
+
+1. Refer screen-shot ![New consortium](png/new-consortium.png)
+2. Click on down arrow against the function `newConsortium` whose signature has two arguments only.
+3. The consortium ID is defined simply as `A` which is `0x4100000000000000000000000000000000000000000000000000000000000000` in `bytes32`.
+4. Since the `lenders` argument is an array of `bytes32`, the value is input as `["0x00...0000","0x00...0001"]`. Three lenders are considered to be part of this consortium and are simply defined as `B`, `C` and `D`. Therefore, this field is defined as `["0x4100000000000000000000000000000000000000000000000000000000000000","0x4200000000000000000000000000000000000000000000000000000000000000","0x4300000000000000000000000000000000000000000000000000000000000000"]`.
+5. Note that, this function will assign the leader of consortium as the address that deployed this contract. So, in all, four lenders will be part of the consortium.
+6. Click on **Transact**.
+
+## Smart Contract and AWS infra-structure demo
+
+As follows.
