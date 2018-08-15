@@ -128,19 +128,31 @@ This section explores the figures as reported above.
   9.2 Solving these equations, `x=485` and `y=3853` - reasonable.
 10. Finally, post contract deployment, the balance of the address is the difference between `100` ETH (initial) and total transaction cost `1205713 wei`.
 
-### Test contract
+### Test contract - new consortium
 
 A new consortium of banks is recorded on the blockchain. In loan syndication, there is a lead banker within a consortium. This Smart Contract provides two options for defining the leader of a consortium. First, the leader is automatically set to the contract deployer _if_ the address creating the consortium is same as that of deployer. Second, the leader maybe manually provided. For sake of simplicity, this document uses the first option.
 
 > The input type is set to `bytes32` so that all entries are prefixed with a `0x` and padded with zeroes for 32 bytes.
 
-1. Refer screen-shot ![New consortium](png/new-consortium.png)
+1. Refer screen-shot ![New consortium](png/new-consortium-a.png)
 2. Click on down arrow against the function `newConsortium` whose signature has two arguments only.
-3. The consortium ID is defined simply as `A` which is `0x4100000000000000000000000000000000000000000000000000000000000000` in `bytes32`.
-4. Since the `lenders` argument is an array of `bytes32`, the value is input as `["0x00...0000","0x00...0001"]`. Three lenders are considered to be part of this consortium and are simply defined as `B`, `C` and `D`. Therefore, this field is defined as `["0x4100000000000000000000000000000000000000000000000000000000000000","0x4200000000000000000000000000000000000000000000000000000000000000","0x4300000000000000000000000000000000000000000000000000000000000000"]`.
+3. The consortium ID is defined simply as `B` which is `0x4200000000000000000000000000000000000000000000000000000000000000` in `bytes32`.
+4. Since the `lenders` argument is an array of `bytes32`, the value is input as `["0x00...0000","0x00...0001"]`. Three lenders are considered to be part of this consortium and are simply defined as `C`, `D` and `E`. Therefore, this field is defined as `["0x4300000000000000000000000000000000000000000000000000000000000000","0x4400000000000000000000000000000000000000000000000000000000000000","0x4500000000000000000000000000000000000000000000000000000000000000"]`.
 5. Note that, this function will assign the leader of consortium as the address that deployed this contract. So, in all, four lenders will be part of the consortium.
 6. Click on **Transact**.
 
-## Smart Contract and AWS infra-structure demo
+### Test contract - consortium members
 
-As follows.
+1. Refer ![Members of consortium](png/consortium-members.png)
+
+### Test contract - consortium leader
+
+1. Refer ![Consortium leader](png/consortium-leader.png)
+
+### Test contract - new loan
+
+1. Refer ![New loan](png/new-loan.png)
+
+### Test contract - new loan, same collateral
+
+1. Refer ![New loan reapply](png/new-loan-reapply.png)
