@@ -2,6 +2,16 @@
 
 This is ...
 
+- [Quick start](#quick-start)
+  - [Smart Contract demo](#smart-contract-demo)
+    - [Deploy contract](#deploy-contract)
+    - [Gas calculation](#gas-calculation)
+    - [Test contract - new consortium](#test-contract---new-consortium)
+    - [Test contract - consortium members](#test-contract---consortium-members)
+    - [Test contract - consortium leader](#test-contract---consortium-leader)
+    - [Test contract - new loan](#test-contract---new-loan)
+    - [Test contract - new loan, same collateral](#test-contract---new-loan-same-collateral)
+
 ## Smart Contract demo
 
 ### Deploy contract
