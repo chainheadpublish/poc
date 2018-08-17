@@ -42,7 +42,9 @@ Therefore, we re-write the scope of PoC in terms of decentralized consensus as f
 
 ## Solution
 
-> This demo saves _only_ the identifiers on the blockchain. The mechanism to generate and derefernce the identifiers is considered **out of scope**. Similarly, it is assumed that, all participants have agreed to common identifiers of loans, collaterals, consortia or others. It is a good practice to save only identifiers or references to actual data on the blockchain. On one hand, this makes the blockchain _light weight_ and on the other, a certain level of privacy is maintained.
+> This demo saves _only_ the identifiers on the blockchain. It is a good practice to save only identifiers or references to actual data on the blockchain. On one hand, this makes the blockchain _light weight_ and on the other, a certain level of privacy is maintained.
+
+> The mechanism to generate and derefernce the identifiers is considered **out of scope**. Similarly, it is assumed that, all participants have agreed to common identifiers of loans, collaterals, consortia or others.
 
 To see this PoC in action, refer ![Quick start](doc/quickstart.md) - a simple demonstration of the Smart Contract. The following are covered:
 
