@@ -44,16 +44,11 @@ Therefore, we re-write the scope of PoC in terms of decentralized consensus as f
 
 > This demo saves _only_ the identifiers on the blockchain. The mechanism to generate and derefernce the identifiers is considered **out of scope**. Similarly, it is assumed that, all participants have agreed to common identifiers of loans, collaterals, consortia or others. It is a good practice to save only identifiers or references to actual data on the blockchain. On one hand, this makes the blockchain _light weight_ and on the other, a certain level of privacy is maintained.
 
-There are two ways to see this PoC in action.
-
-1. ![Quick start](doc/quickstart.md) - a simple demonstration of the Smart Contract without focussing much on underlying infra-structure.
-2. ![AWS infra-structure](doc/awsinfra.md) - an underlying infra-structure on Amazon Web Services (AWS), on to which the Smart Contract is deployed, is described.
-
-In both of the demos, the following are covered:
+To see this PoC in action, refer ![Quick start](doc/quickstart.md) - a simple demonstration of the Smart Contract. The following are covered:
 
 1. Deployment of contract.
 2. Create a new consortium.
-3. Read the members of the consortium created in 2.
-4. Read the leader of the consortium created in 2.
+3. (Optional) Read the members of the consortium created in 2.
+4. (Optional) Read the leader of the consortium created in 2.
 5. Create a new loan with the consortium (created in 2) with a collateral.
 6. Create a new loan with the consortium (created in 2) with same collateral as used in 5.

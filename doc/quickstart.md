@@ -1,6 +1,6 @@
 # Quick start
 
-This is ...
+This chapter describes the deployment of Smart Contract and testing of the same for new consortium, new loan and new loan with same collateral.
 
 - [Quick start](#quick-start)
   - [Smart Contract demo](#smart-contract-demo)
