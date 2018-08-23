@@ -54,3 +54,5 @@ To see this PoC in action, refer ![Quick start](doc/quickstart.md) - a simple de
 4. (Optional) Read the leader of the consortium created in 2.
 5. Create a new loan with the consortium (created in 2) with a collateral.
 6. Create a new loan with the consortium (created in 2) with same collateral as used in 5.
+
+For a detailed demonsration on AWS infra-structure, refer ![AWS Demo](../doc/aws-demo.md).
