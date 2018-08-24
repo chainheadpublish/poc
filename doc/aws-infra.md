@@ -57,7 +57,7 @@ sudo apt-get update
 sudo apt-get install ethereum
 ```
 
-For more information, see [Installation Instructions for Ubuntu](Installation Instructions for Ubuntu).
+For more information, see [Installation Instructions for Ubuntu](https://github.com/ethereum/go-ethereum/wiki/Installation-Instructions-for-Ubuntu).
 
 To test the installation, simply type `geth` on command line and hit enter. This will make this machine connect to the main Ethereum network with messages as shown below.
 
@@ -102,11 +102,11 @@ geth --datadir poc account new
 echo 'your_password' > poc/password.txt
 ```
 
-Copy the value of `Address` into a file that can be located easily later.
+Copy the value resulting of `Address` into a file that can be located easily later.
 
 ### Boot-node
 
-The `Node0` machine will be set-up as a boot node. A boot node is a machine on the Ethereum network that is looked up clients for node discovery. See [more](https://github.com/ethereum/go-ethereum/wiki/Connecting-to-the-network). To set-up the boot node, run the commands as shown below. Note that, `bootnode` command was installed upon installation of Ethereum clients.
+The `Node0` machine will be set-up as a boot node. A boot node is a machine on the Ethereum network that is looked up clients for node discovery. See [more](https://github.com/ethereum/go-ethereum/wiki/Connecting-to-the-network). To set-up the boot node, run the commands as shown below. Note that, `bootnode` command was installed upon installation of Ethereum client.
 
 ```bash
 bootnode -genkey boot.key
@@ -169,12 +169,12 @@ Notes:
 2. `networkid` is set to the value when running the `puppeth` command.
 3. `port` uses the default value for discovery.
 4. `bootnodes` tells `geth` to use a boot node for discovery. Its value is set to the value of `enode` as displayed in the output of `bootnode` command on `Node0` followed by the `@` symbol and the public IP address of `Node0` mention. The port number of `30301` is default.
-5. `syncmode`
+5. `syncmode` syncs the block headers, the block bodies, and validates every element from genesis block.
 6. `rpc` exposes the RPC feature of this node.
 7. `rpcaddr` binds RPC to `localhost`; so, connections from other machines would not happen.
-8. `rpccorsdoman` and `rpcvhosts` allow connections from client and server side. (_Not entirely application to this PoC_)
+8. `rpccorsdoman` and `rpcvhosts` allow connections from client and server side. (_Not entirely applicable to this PoC_)
 9. `rpcapi` lists the various API exposed via RPC by this machine.
-10. `gasprice` set to minimal value.
+10. `gasprice` set to minimal acceptable value.
 11. `unlock` and `password` allow the use of the account (as set previously) to be credited with Ethers.
 
 Run this command on `Node2`.
