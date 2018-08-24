@@ -2,7 +2,7 @@ var Web3 = require('web3');
 var fs = require('fs');
 var path = require('path');
 //
-var ethereumHttpEndpoint = "http://52.2.58.221:8545";
+var ethereumHttpEndpoint = "http://52.xxx.xxx.xxxx:8545";
 var accountAddr = "0xb16ee696fcc86065fdc05a36da77d67fca2df1b2";
 var pwd = "Welc0me";
 //
