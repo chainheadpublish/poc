@@ -21,11 +21,11 @@ For the Smart Contract demo, follow the steps below.
 1. Launch https://remix.ethereum.org in a browser.
 2. Remove the default `.sol` contract that appears.  
   2.1 On the left hand navigation pane, expand the button for browser.  
-  2.2 Delete files appearing there. See ![Delete existing files](../png/remix-ide.png)
+  2.2 Delete files appearing there. See ![Delete existing files](../png/remix-ide.png) below.
 3. Click the plus icon on the top of left hand navigation pane.
 4. Enter file name as `loansynd.sol` and click OK. ![New contract](../png/new-contract.png)
 5. Copy all the contents of `loandsynd.sol` from this project into the editor. ![Contract code in Remix IDE](../png/new-contract-code.png)
-6. Click on **Start to Compile**. (See ![Start to Compile](../png/start-compile.png)). You may see some compilation warnings; they are OK to ignore for this demo.
+6. Click on **Start to Compile**. See ![Start to Compile](../png/start-compile.png) below. You may see some compilation warnings; they are OK to ignore for this demo.
 7. Click on **Run** tab. Ensure that the **Environment** is set to **Javascript VM**. This option helps in quickly testing the contract without focussing on the underlying infra-structure. ![Environment setting](../png/run-environment.png)
 8. Click on **Deploy** button to deploy this contract. ![Deploy contract](../png/deploy.png)
 9. The results of deployment can be seen in screen-shot below. ![Deployment results](../png/deployment-results.png)   
@@ -69,7 +69,7 @@ A new consortium of banks is recorded on the blockchain. In loan syndication, th
 
 > The input type is set to `bytes32` so that all entries are prefixed with a `0x` and padded with zeroes for 32 bytes.
 
-1. Refer screen-shot ![New consortium](../png/new-consortium-a.png)
+1. Refer screen-shot below. ![New consortium](../png/new-consortium-a.png)
 2. Click on down arrow against the function `newConsortium` whose signature has two arguments only.
 3. The consortium ID is defined simply as `B` which is `0x4200000000000000000000000000000000000000000000000000000000000000` in `bytes32`.
 4. Since the `lenders` argument is an array of `bytes32`, the value is input as `["0x00...0000","0x00...0001"]`. Three lenders are considered to be part of this consortium and are simply defined as `C`, `D` and `E`. Therefore, this field is defined as `["0x4300000000000000000000000000000000000000000000000000000000000000","0x4400000000000000000000000000000000000000000000000000000000000000","0x4500000000000000000000000000000000000000000000000000000000000000"]`.
@@ -78,7 +78,7 @@ A new consortium of banks is recorded on the blockchain. In loan syndication, th
 
 ### Test contract - consortium members
 
-1. Refer ![Members of consortium](../png/consortium-members.png)
+1. Refer screen-shot below. ![Members of consortium](../png/consortium-members.png)
 2. Enter consortium ID as `0x4200000000000000000000000000000000000000000000000000000000000000` for the function `consortiumMembers` and click on **Call**.
 3. The result is seen in the blue box in the output area.
 4. The decoded output shows a `bytes32` array of all the lenders that are part of this consortium.
@@ -86,7 +86,7 @@ A new consortium of banks is recorded on the blockchain. In loan syndication, th
 
 ### Test contract - consortium leader
 
-1. Refer ![Consortium leader](../png/consortium-leader.png)
+1. Refer screen-shot below. ![Consortium leader](../png/consortium-leader.png)
 2. Enter consortium ID as `0x4200000000000000000000000000000000000000000000000000000000000000` for the function `consortiumMembers` and click on **Call**.
 3. The result is seen in the dark green box in the output area.
 4. The decoded output shows a `bytes32` string for the consortium leader - `0x4c4541444552` is ASCII for `LEADER` as mentioned in the contract.
@@ -94,17 +94,21 @@ A new consortium of banks is recorded on the blockchain. In loan syndication, th
 
 ### Test contract - new loan
 
-1. Refer ![New loan](../png/new-loan.png)
+1. Refer screen-shot below ![New loan](../png/new-loan.png)
 2. To apply for a new loan against a collateral, enter arguments for the function `newLoan` as follows. Refer blue color box in the image.
+
   2.1. Enter consortium ID as `0x4200000000000000000000000000000000000000000000000000000000000000`.
+
   2.2. Enter loan ID as letter `P` or `0x5000000000000000000000000000000000000000000000000000000000000000` as a `bytes32` string.
+
   2.3. Enter customer ID as letter `Q` or `0x5100000000000000000000000000000000000000000000000000000000000000` as a `bytes32` string.
+  
   2.4. Enter collateral ID as letter `R` or `0x5200000000000000000000000000000000000000000000000000000000000000` as a `bytes32` string.
 3. Click on **Transact** to initiate the contract execution. The result of execution is not shown in the screen-shot.
 
 ### Test contract - new loan, same collateral
 
-1. Refer ![New loan reapply](../png/new-loan-reapply.png)
+1. Refer screen-shot below ![New loan reapply](../png/new-loan-reapply.png)
 2. To apply for yet another loan, we follow same steps as above except:
   2.1. Enter a new loan ID as letter `S` or `0x5300000000000000000000000000000000000000000000000000000000000000` as a `bytes32` string.
   2.2. Enter collateral ID same as earlier i.e. `R` or `0x5200000000000000000000000000000000000000000000000000000000000000` as a `bytes32` string.
