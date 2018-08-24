@@ -170,7 +170,7 @@ Notes:
 3. `port` uses the default value for discovery.
 4. `bootnodes` tells `geth` to use a boot node for discovery. Its value is set to the value of `enode` as displayed in the output of `bootnode` command on `Node0` followed by the `@` symbol and the public IP address of `Node0` mention. The port number of `30301` is default.
 5. `syncmode` syncs the block headers, the block bodies, and validates every element from genesis block.
-6. `rpc` exposes the RPC feature of this node.
+6. `rpc` exposes the RPC feature of this node on `8545` port number.
 7. `rpcaddr` binds RPC to `localhost`; so, connections from other machines would not happen.
 8. `rpccorsdoman` and `rpcvhosts` allow connections from client and server side. (_Not entirely applicable to this PoC_)
 9. `rpcapi` lists the various API exposed via RPC by this machine.
