@@ -2,7 +2,7 @@ var Web3 = require('web3');
 var fs = require('fs');
 var path = require('path');
 //
-var ethereumHttpEndpoint = "http://52.2.58.221:8545";
+var ethereumHttpEndpoint = "http://52.xxx.xxx.xxxx:8545";
 var contractHome = "/Users/nsubrahm/GitHub/poc";
 var contractName = "loansyndev";
 var contractAddress = "0xadd36c62a8fe6f81f53ac8dccbfa1d659d709117";
